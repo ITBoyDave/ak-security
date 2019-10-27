@@ -21,8 +21,8 @@ JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_encrypt(
  * Method:    decrypt
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_decrypt
-(JNIEnv *env, jobject obj, jstring key) {
+JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_decrypt(
+		JNIEnv *env, jobject obj, jstring key) {
 	const char *str = (*env)->GetStringUTFChars(env, key, 0);
 	str = decrypt(str);
 	jstring value = (*env)->NewStringUTF(env, str);
@@ -30,3 +30,11 @@ JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_decrypt
 	return value;
 }
 
+int main() {
+	char *input = "草泥马比的c语言";
+	char *target = encrypt(input);
+	printf("input = %s, target = %s;\n", input, target);
+	char *origin = decrypt(target);
+	printf("input = %s; target = %s;\n", target, origin);
+	return 0;
+}
