@@ -95,7 +95,7 @@ struct Encoder {
 	int linemax;
 	boolean isURL;
 	boolean doPadding;
-	char* (*encode)(struct Encoder *encoder, char *str);
+	char* (*encode)(struct Encoder *encoder, const char *str);
 	int (*encode_calc)(struct Encoder *encoder, const char src[], int offset,
 			int limit, char dst[], const char base64[]);
 	int (*encode_outlength)(struct Encoder *encoder, int srclen);
@@ -104,7 +104,7 @@ struct Encoder {
 struct Decoder {
 	boolean isURL;
 	boolean isMIME;
-	char* (*decode)(struct Decoder *decoder, char *str);
+	char* (*decode)(struct Decoder *decoder, const char *str);
 	int (*decode_calc)(struct Decoder *decoder, const char src[], int offset,
 			int limit, char dst[], const int base64[]);
 	int (*decode_outlength)(struct Decoder *decoder, const char src[],
@@ -114,7 +114,7 @@ struct Decoder {
 /**
  *
  */
-char* encode(struct Encoder *encoder, char *str) {
+char* encode(struct Encoder *encoder, const char *str) {
 	int srclen = strlen(str);
 	int len = encoder->encode_outlength(encoder, srclen);
 	char dst[len];
@@ -242,7 +242,7 @@ void Encoder_RFC2045(struct Encoder *RFC2045) {
 /**
  * base default RFC4648
  */
-char* base64_encode(char *str) {
+char* base64_encode(const char *str) {
 	struct Encoder RFC4648;
 	Encoder_RFC4648(&RFC4648);
 	return RFC4648.encode(&RFC4648, str);
@@ -251,7 +251,7 @@ char* base64_encode(char *str) {
 /**
  * url RFC4648_URLSAFE
  */
-char* base64_encode_url(char *str) {
+char* base64_encode_url(const char *str) {
 	struct Encoder RFC4648_URLSAFE;
 	Encoder_RFC4648_URLSAFE(&RFC4648_URLSAFE);
 	return RFC4648_URLSAFE.encode(&RFC4648_URLSAFE, str);
@@ -260,7 +260,7 @@ char* base64_encode_url(char *str) {
 /**
  * mime RFC2045
  */
-char* base64_encode_mime(char *str) {
+char* base64_encode_mime(const char *str) {
 	struct Encoder RFC2045;
 	Encoder_RFC2045(&RFC2045);
 	return RFC2045.encode(&RFC2045, str);
@@ -365,7 +365,7 @@ int decode_calc(struct Decoder *decoder, const char src[], int offset,
 	return dp;
 }
 
-char* decode(struct Decoder *decoder, char *str) {
+char* decode(struct Decoder *decoder, const char *str) {
 	int srclen = strlen(str);
 	char src[srclen];
 	strcpy(src, str);
@@ -437,7 +437,7 @@ void Decoder_RFC2045(struct Decoder *RFC2045) {
 /**
  * base default RFC4648
  */
-char* base64_decode(char *str) {
+char* base64_decode(const char *str) {
 	struct Decoder RFC4648;
 	Decoder_RFC4648(&RFC4648);
 	return RFC4648.decode(&RFC4648, str);
@@ -446,7 +446,7 @@ char* base64_decode(char *str) {
 /**
  * url RFC4648_URLSAFE
  */
-char* base64_decode_url(char *str) {
+char* base64_decode_url(const char *str) {
 	struct Decoder RFC4648_URLSAFE;
 	Decoder_RFC4648_URLSAFE(&RFC4648_URLSAFE);
 	return RFC4648_URLSAFE.decode(&RFC4648_URLSAFE, str);
@@ -455,7 +455,7 @@ char* base64_decode_url(char *str) {
 /**
  * mime RFC2045
  */
-char* base64_decode_mime(char *str) {
+char* base64_decode_mime(const char *str) {
 	struct Decoder RFC2045;
 	Decoder_RFC2045(&RFC2045);
 	return RFC2045.decode(&RFC2045, str);
@@ -464,9 +464,9 @@ char* base64_decode_mime(char *str) {
 /**
  * main 调试程序
  */
-int main(int argc, char *args[]) {
+int main_test(int argc, char *args[]) {
 
-	char *origin0 = "c语言是最好的！TMD!";
+	const char *origin0 = "c语言是最好的！TMD!";
 	char *encode_origin0 = base64_encode(origin0);
 	char *decode_encode_origin0 = base64_decode(encode_origin0);
 	printf("origin0 = %s, encode_origin0 = %s, decode_encode_origin0 = %s;\n",

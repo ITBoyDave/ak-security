@@ -13,31 +13,31 @@
 /**
  * base default
  */
-char* base64_encode(char *str);
+char* base64_encode(const char *str);
 
 /**
  * url
  */
-char* base64_encode_url(char *str);
+char* base64_encode_url(const char *str);
 
 /**
  * mime
  */
-char* base64_encode_mime(char *str);
+char* base64_encode_mime(const char *str);
 
 
 /**
  * base default
  */
-char* base64_decode(char *str);
+char* base64_decode(const char *str);
 
 /**
  * url
  */
-char* base64_decode_url(char *str);
+char* base64_decode_url(const char *str);
 
 /**
  * mime
  */
-char* base64_decode_mime(char *str);
+char* base64_decode_mime(const char *str);
 

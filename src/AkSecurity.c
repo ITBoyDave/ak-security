@@ -1,6 +1,6 @@
+#include <security.h>
 #include <stdio.h>
 #include <AkSecurity.h>
-#include <security.h>
 
 /*
  * Class:     cn_bigboydave_common_security_AkSecurity
