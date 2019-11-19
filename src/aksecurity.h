@@ -12,7 +12,7 @@ extern "C" {
  * Method:    encrypt
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_encrypt
+JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_core_security_AkSecurity_encrypt
   (JNIEnv *env, jobject obj, jstring value);
 
 /*
@@ -20,7 +20,7 @@ JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_encrypt
  * Method:    decrypt
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_security_AkSecurity_decrypt
+JNIEXPORT jstring JNICALL Java_cn_bigboydave_common_core_security_AkSecurity_decrypt
   (JNIEnv *env, jobject obj, jstring key);
 
 #ifdef __cplusplus
